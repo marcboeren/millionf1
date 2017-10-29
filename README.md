@@ -1,6 +1,8 @@
 # millionf1
 Formula 1 statistics viewer with a GraphQL back-end and a React front-end.
 
+This uses data from http://ergast.com/mrd/, please refer to their terms if you want to do anything more than this demo-app.
+
 Start server
 ```
 cd server
