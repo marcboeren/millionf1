@@ -119,5 +119,7 @@ Constructor
 
 Let's see how that translates to GraphQL.
 
+Ok, I have a simple working version now. But, the API is per season, then races/results, and finally drivers. I want it the other way around, so let's give that a shot.
+
 
 
