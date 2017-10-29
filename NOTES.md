@@ -136,4 +136,9 @@ create-react-app client
 cd client
 npm start
 
+Hmmm, this took a bit more time than expected, I started off with Apollo Client, but documentation and npm-install don't add up, probably because they just released a new version (2.0.0)? In any case, I dropped that for now, and started with fake data to get the interface working.
+
+Now, add a touch of styling, then, hook up the graphql data.
+
+
 
