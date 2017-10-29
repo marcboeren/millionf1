@@ -36,3 +36,88 @@ npm install --save-dev graphql-tools
 ok, up and running!
 
 next up, looking at the ergast api and defining a schema for millionf1.
+
+GET https://ergast.com/api/f1/2017.json
+
+no data yet? MRData.RaceTable.Races empty
+
+MRData.total: "20"
+MRData.RaceTable.Races [
+
+.round "1"
+.raceName "Australian Grand Prix"
+.date "2017-03-26"
+,...
+
+]
+
+GET https://ergast.com/api/f1/2017/1/results.json
+
+no data yet? MRData.RaceTable.Races empty
+
+MRData.RaceTable.Races[0]
+
+.round "1"
+.raceName "Australian Grand Prix"
+.date "2017-03-26"
+.Results [
+
+.position "1"
+.positionText "1"
+.number "5"
+.points "25"
+.grid "2"
+.laps "57"
+.status "Finished"
+.Driver
+  .driverId "vettel"
+  .code "VET"
+  .givenName "Sebastian"
+  .familyName "Vettel"
+.Constructor
+  .constructorId "ferrari"
+  .name "Ferrari"
+, ...
+]
+
+ The value of the positionText attribute is either an integer (finishing position), “R” (retired), “D” (disqualified), “E” (excluded), “W” (withdrawn), “F” (failed to qualify) or “N” (not classified).
+
+Looks like that's enough data to get going.
+
+How will our schema look?
+
+Season
+  .year "2017"
+  .races [Race]
+
+Race
+  .round "1"
+  .name "Australian Grand Prix"
+  .date "2017-03-26"
+  .results [RaceResult]
+
+RaceResult
+  .position "1"
+  .number "5"
+  .driver Driver
+  .constructor Constructor
+  .points "25"
+  .status "1" (positionText)
+  .statusText "Finished" (status)
+  .laps "57"
+  .grid "2"
+
+Driver
+  .id "vettel"
+  .code "VET"
+  .name "Vettel"
+  .givenName "Sebastian"
+
+Constructor
+  .id "ferrari"
+  .name "Ferrari"
+
+Let's see how that translates to GraphQL.
+
+
+

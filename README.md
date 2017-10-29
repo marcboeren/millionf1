@@ -8,3 +8,10 @@ npm start
 ```
 
 Now go to your browser and enter `http://localhost:3000/graphiql`.
+
+Query:
+```
+{
+  testString
+}
+```
