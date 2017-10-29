@@ -8,3 +8,26 @@ I've found http://ergast.com/mrd/ for F1 data, it has a JSON API that I could be
 For the frontend I'll be using React, and asa stretch goal I'll see if I can produce some nice graphs from the statistics.
 
 So, let's start with the back-end.
+
+mkdir server
+mkdir client
+cd server
+
+npm init
+npm install express --save
+npm install --save graphql apollo-server-express
+
+create app.js with demo-code
+
+npm install --save-dev babel-cli
+npm install --save-dev babel-preset-es2015 babel-preset-stage-2
+
+(to support import statement (and other es2016 features))
+
+update package.json with start command
+
+npm start
+
+hey looky, http://localhost:3000/graphiql/ now gives an interface
+...and an error since there's no schema yet ;-)
+
