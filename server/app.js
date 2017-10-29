@@ -5,7 +5,7 @@ import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
 import schema from './data/schema';
 
 
-const PORT = 3000;
+const PORT = 3001;
 
 const app = express();
 

@@ -129,3 +129,11 @@ Remove mocking, replace with actual resolvers (but still example data)...
 
 Now, with actual data from ergast. Synchronously fetch at startup, sue me ;-)
 
+****** start client ***
+
+npm install -g create-react-app
+create-react-app client
+cd client
+npm start
+
+

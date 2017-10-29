@@ -7,7 +7,7 @@ cd server
 npm start
 ```
 
-Now go to your browser and enter `http://localhost:3000/graphiql`.
+Now go to your browser and enter `http://localhost:3001/graphiql`.
 
 Query:
 ```
@@ -30,3 +30,12 @@ Query:
   }
 }
 ```
+
+
+Start client dev
+```
+cd client
+npm start
+```
+
+Go to `http://localhost:3000`.
