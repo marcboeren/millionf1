@@ -127,3 +127,5 @@ Actually, let's keep the extra relations, but just go by season and make the bac
 
 Remove mocking, replace with actual resolvers (but still example data)...
 
+Now, with actual data from ergast. Synchronously fetch at startup, sue me ;-)
+

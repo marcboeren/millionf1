@@ -12,7 +12,9 @@
   "dependencies": {
     "apollo-server-express": "^1.2.0",
     "express": "^4.16.2",
-    "graphql": "^0.11.7"
+    "graphql": "^0.11.7",
+    "request": "^2.83.0",
+    "sync-request": "^4.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
