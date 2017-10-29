@@ -34,17 +34,17 @@ type Driver {
   code: String!
   name: String! # familyName
   givenName: String!
-  raceResults: [RaceResult]! # just for the current season, ordered by round
+  raceResults: [RaceResult]!
 }
 
 type Constructor {
   id: String! # constructorId
   name: String!
-  raceResults: [RaceResult]! # just for the current season, ordered by round
+  raceResults: [RaceResult]!
 }
 
 type Query {
-  drivers: [Driver]
+  season: Season # 2017 only, perhaps later we can filter on year
 }
 `;
 
