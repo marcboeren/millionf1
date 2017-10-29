@@ -125,3 +125,5 @@ Hey, that looks pretty nice. Time for lunch :)
 
 Actually, let's keep the extra relations, but just go by season and make the back-end more data-centric, and if we want the interface to start showing a list of drivers for the 2017 season than we can accomplish that client-side.
 
+Remove mocking, replace with actual resolvers (but still example data)...
+
