@@ -1,35 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
-
-const SEASONINFO = {
-  year: 2017,
-  rounds: 20
-};
-
-const DRIVERINFO = [
-  { id: "vettel", code: "VET", number: 5, name: "Vettel", givenName: "Sebastian", totalPoints: 68,
-    raceresults: [
-       {round: 1, position: 1, points: 25, grid: 2 },
-       {round: 2, position: 2, points: 18, grid: 2 },
-       {round: 3, position: 1, points: 25, grid: 3 }
-    ]
-  },
-  { id: "hamilton", code: "HAM", number: 44, name: "Hamilton", givenName: "Lewis", totalPoints: 61,
-    raceresults: [
-       {round: 1, position: 2, points: 18, grid: 1 },
-       {round: 2, position: 1, points: 25, grid: 1 },
-       {round: 3, position: 2, points: 18, grid: 2 }
-    ]
-  }
-];
-
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 
 const resultviews = {
     POSITION: 'position',
     POINTS: 'points',
     QUALIFYING: 'qualifying',
 }
-
 
 class RaceResults extends Component {
 
@@ -101,7 +79,48 @@ class DriverInfo extends Component {
     super(props);
     this.state = { selecteddrivers: new Set()
                  , resultview: resultviews.POSITION
+                 , driverinfo: null
+                 , seasoninfo: null
                  };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.data.season) {
+      var season = nextProps.data.season;
+      var seasoninfo = { year: season.year, rounds: season.rounds };
+      this.setState({seasoninfo: seasoninfo});
+
+      var driverinfo = [];
+      var drivers = {}
+      for (var i = 0; i < season.races.length; ++i ) {
+        var race = season.races[i];
+        for (var j = 0; j < race.results.length; ++j ) {
+          var result = race.results[j];
+          var driver;
+          if (drivers.hasOwnProperty(result.driver.id)) {
+            driver = drivers[result.driver.id];
+          }
+          else{
+            driver = { id: result.driver.id
+                     , code: result.driver.code
+                     , number: result.number
+                     , name: result.driver.name
+                     , givenName: result.driver.givenName
+                     , totalPoints: 0
+                     , raceresults: [] };
+            drivers[result.driver.id] = driver;
+            driverinfo.push(driver);
+          }
+          driver.totalPoints+= result.points;
+          driver.raceresults.push({ round: race.round
+                                  , position: result.position
+                                  , points: result.points
+                                  , grid: result.grid
+                                  });
+        }
+      }
+      this.setState({driverinfo: driverinfo});
+    }
   }
 
   handleDriverClick(driver) {
@@ -121,8 +140,23 @@ class DriverInfo extends Component {
 
   render() {
     var self = this;
-    this.props.driverinfo.sort((a, b) => b.totalPoints - a.totalPoints);
-    var DriverList = this.props.driverinfo.map((driver) => {
+    if (!this.state.seasoninfo) {
+      return (
+        <div className="driverinfo">
+          Formula 1 Season data not loaded yet, please wait...
+        </div>
+      );
+    }
+    if (!this.state.driverinfo) {
+      return (
+        <div className="driverinfo">
+          <h1>Formula 1 Season {this.state.seasoninfo.year}</h1>
+          Race data not loaded yet, please wait...
+        </div>
+      );
+    }
+    this.state.driverinfo.sort((a, b) => b.totalPoints - a.totalPoints);
+    var DriverList = this.state.driverinfo.map((driver) => {
       return (
         <div className={"driver" + (this.state.selecteddrivers.has(driver.id) ? ' is-selected' : '')}
              key={driver.id}
@@ -131,10 +165,10 @@ class DriverInfo extends Component {
         </div>
       );
     });
-    var selecteddrivers = this.props.driverinfo.filter((driver) => this.state.selecteddrivers.has(driver.id));
+    var selecteddrivers = this.state.driverinfo.filter((driver) => this.state.selecteddrivers.has(driver.id));
     return (
       <div className="driverinfo">
-        <h1>Formula 1 Season {this.props.seasoninfo.year}</h1>
+        <h1>Formula 1 Season {this.state.seasoninfo.year}</h1>
         <div className="drivers">
           {DriverList}
         </div>
@@ -148,7 +182,7 @@ class DriverInfo extends Component {
                 onClick={(e) => self.handleResultviewClick(resultviews.QUALIFYING, e)}>Qualifying (grid, actually)</div>
          </div>
          <div className="races">
-           <RaceResults seasoninfo={this.props.seasoninfo} drivers={selecteddrivers} resultview={this.state.resultview}/>
+           <RaceResults seasoninfo={this.state.seasoninfo} drivers={selecteddrivers} resultview={this.state.resultview}/>
          </div>
        </div>
       </div>
@@ -156,14 +190,42 @@ class DriverInfo extends Component {
   }
 }
 
+const SEASON_DATA = gql`query {
+  season {
+    year,
+    rounds,
+    races {
+      round,
+      name,
+      results {
+        position,
+        number,
+        driver {
+          id,
+          code,
+          name,
+          givenName,
+        },
+        points,
+        grid,
+      },
+    },
+  }
+}`;
+const DriverInfoWithData = graphql(SEASON_DATA)(DriverInfo);
+
 class App extends Component {
   render() {
     return (
       <div className="app">
-        <DriverInfo seasoninfo={SEASONINFO} driverinfo={DRIVERINFO}/>
+        <DriverInfoWithData/>
       </div>
     );
   }
 }
 
+
+
 export default App;
+
+
