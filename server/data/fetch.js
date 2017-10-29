@@ -19,9 +19,9 @@ const fetch_season = (year) => {
     var response = request('GET', season_url.replace('{year}', year.toString()));
     let data = JSON.parse(response.body.toString('utf-8'));
 
-    model.season = { year: data.MRData.RaceTable.season, races: [] };
-
     var rounds = data.MRData.RaceTable.Races.length;
+    model.season = { year: data.MRData.RaceTable.season, rounds: rounds, races: [] };
+
     for (var round = 1; round <= rounds; ++round) {
         console.log("Round: "+round.toString());
         response = request('GET', round_url.replace('{year}', year.toString()).replace('{round}', round.toString()));

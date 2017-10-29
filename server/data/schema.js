@@ -6,6 +6,7 @@ import fetch from './fetch';
 const typeDefs = `
 type Season {
   year: String!
+  rounds: Int!
   races: [Race]!
 }
 
