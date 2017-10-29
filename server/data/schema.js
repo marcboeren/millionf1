@@ -9,6 +9,7 @@ type Season {
 }
 
 type Race {
+  season: Season!
   round: Int!
   name: String!
   date: String!
@@ -25,6 +26,7 @@ type RaceResult {
   statusText: String! # (status)
   laps: Int!
   grid: Int!
+  race: [Race]!
 }
 
 type Driver {
@@ -32,11 +34,13 @@ type Driver {
   code: String!
   name: String! # familyName
   givenName: String!
+  raceResults: [RaceResult]! # just for the current season, ordered by round
 }
 
 type Constructor {
   id: String! # constructorId
   name: String!
+  raceResults: [RaceResult]! # just for the current season, ordered by round
 }
 
 type Query {

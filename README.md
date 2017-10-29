@@ -12,6 +12,20 @@ Now go to your browser and enter `http://localhost:3000/graphiql`.
 Query:
 ```
 {
-  testString
+  drivers {
+    id,
+    name,
+    raceResults {
+      race {
+        season {
+          year,
+        },
+        round,
+        name,
+      }
+      position,
+      points,
+    }
+  }
 }
 ```
