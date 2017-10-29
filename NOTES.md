@@ -140,5 +140,7 @@ Hmmm, this took a bit more time than expected, I started off with Apollo Client,
 
 Now, add a touch of styling, then, hook up the graphql data.
 
+Ok, we're going with minimal styling, that's cool ;-)
+
 
 

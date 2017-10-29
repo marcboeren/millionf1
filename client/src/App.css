@@ -1,4 +1,18 @@
 
-.app {
+.app { padding: 40px; }
+.drivers { display: inline-block; vertical-align: top; width: 320px; margin-right: 20px; }
+.results { display: inline-block; vertical-align: top; width: calc(100% - 320px - 20px); }
+.resultviews { margin-bottom: 10px; }
 
-}
+.drivers .driver { border: 1px solid silver; padding: 3px 10px; margin-bottom: 2px; position: relative; }
+.drivers .driver .name { padding-right: 40px; }
+.drivers .driver .points { position: absolute; top: 3px; right: 0; width: 40px; text-align: center; }
+
+.resultviews .resultview { display: inline-block; vertical-align: middle; margin-right: 10px; border: 1px solid silver; padding: 3px 10px; }
+
+table.raceresults { border-spacing: 0; border-collapse: collapse; }
+table.raceresults th, table.raceresults td { padding: 3px 10px; border: 1px solid silver; text-align: center; }
+table.raceresults td.code { text-align: left; }
+table.raceresults td.round { width: 40px; }
+
+.app .is-selected { background-color: silver; border-color: black; }

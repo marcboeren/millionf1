@@ -41,7 +41,7 @@ class RaceResults extends Component {
 
     var RaceResultHeaderCells = [];
     for(var round=1; round <= this.props.seasoninfo.rounds; ++round) {
-      RaceResultHeaderCells.push(<td key={round}>{round}</td>);
+      RaceResultHeaderCells.push(<th className="round" key={round}>{round}</th>);
     }
     var RaceResultsRow = this.props.drivers.map((driver) => {
       var RaceResultCells = [];
@@ -63,10 +63,10 @@ class RaceResults extends Component {
               value = raceresult.position;
               break;
           }
-          RaceResultCells.push(<td key={round}>{value}</td>);
+          RaceResultCells.push(<td className="round" key={round}>{value}</td>);
         }
         else {
-          RaceResultCells.push(<td key={round}>-</td>);
+          RaceResultCells.push(<td className="round" key={round}>-</td>);
         }
       }
       return (
@@ -138,17 +138,19 @@ class DriverInfo extends Component {
         <div className="drivers">
           {DriverList}
         </div>
-        <div className="resultviews">
-          <div className={"resultview" + (this.state.resultview === resultviews.POSITION ? ' is-selected' : '')}
-               onClick={(e) => self.handleResultviewClick(resultviews.POSITION, e)}>Position</div>
-          <div className={"resultview" + (this.state.resultview === resultviews.POINTS ? ' is-selected' : '')}
-               onClick={(e) => self.handleResultviewClick(resultviews.POINTS, e)}>Points</div>
-          <div className={"resultview" + (this.state.resultview === resultviews.QUALIFYING ? ' is-selected' : '')}
-               onClick={(e) => self.handleResultviewClick(resultviews.QUALIFYING, e)}>Qualifying (grid, actually)</div>
-        </div>
-        <div className="races">
-          <RaceResults seasoninfo={this.props.seasoninfo} drivers={selecteddrivers} resultview={this.state.resultview}/>
-        </div>
+        <div className="results">
+         <div className="resultviews">
+           <div className={"resultview" + (this.state.resultview === resultviews.POSITION ? ' is-selected' : '')}
+                onClick={(e) => self.handleResultviewClick(resultviews.POSITION, e)}>Position</div>
+           <div className={"resultview" + (this.state.resultview === resultviews.POINTS ? ' is-selected' : '')}
+                onClick={(e) => self.handleResultviewClick(resultviews.POINTS, e)}>Points</div>
+           <div className={"resultview" + (this.state.resultview === resultviews.QUALIFYING ? ' is-selected' : '')}
+                onClick={(e) => self.handleResultviewClick(resultviews.QUALIFYING, e)}>Qualifying (grid, actually)</div>
+         </div>
+         <div className="races">
+           <RaceResults seasoninfo={this.props.seasoninfo} drivers={selecteddrivers} resultview={this.state.resultview}/>
+         </div>
+       </div>
       </div>
     );
   }
