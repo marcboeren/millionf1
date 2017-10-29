@@ -31,3 +31,8 @@ npm start
 hey looky, http://localhost:3000/graphiql/ now gives an interface
 ...and an error since there's no schema yet ;-)
 
+npm install --save-dev graphql-tools
+
+ok, up and running!
+
+next up, looking at the ergast api and defining a schema for millionf1.
