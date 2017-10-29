@@ -142,5 +142,8 @@ Now, add a touch of styling, then, hook up the graphql data.
 
 Ok, we're going with minimal styling, that's cool ;-)
 
+GraphQL data hooked up!
+Everything seems to work fine, let's wrap this up for today :-)
+Thanks for watching!
 
 
