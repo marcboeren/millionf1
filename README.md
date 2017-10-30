@@ -33,6 +33,8 @@ Query:
 }
 ```
 
+![Formula 1 statistics viewer GraphiQL interface in action](http://www.million.nl/file/millionf1-graphiql.gif)
+
 
 Start client dev
 ```
@@ -41,3 +43,5 @@ npm start
 ```
 
 Go to `http://localhost:3000`.
+
+![Formula 1 statistics viewer in action](http://www.million.nl/file/millionf1-client.gif)
